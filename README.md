@@ -1,4 +1,4 @@
-# hal
+# Today
 
 A TODO app with [React](https://facebook.github.io/react/) and [Flux](https://facebook.github.io/flux/) just for Today
 

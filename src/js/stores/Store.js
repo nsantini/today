@@ -7,15 +7,26 @@ var Dispatcher = require('../dispatcher/Dispatcher');
 var Store = assign({}, EventEmitter.prototype, {
 
   getAllTodos: function() {
-    return _filter(_.map(_.values(localStorage), function(todo) {
-        try {
-          return JSON.parse(todo);
-        } catch (err) {
-          return false;
-        }
-      }), function(todo) {
-        return _isObject(todo) && todo.id && todo.id.startsWith('today_');
-      });
+    var objects = _.map(_.values(localStorage), function(todo) {
+      try {
+        return JSON.parse(todo);
+      } catch (err) {
+        return false;
+      }
+    });
+    var todos = _.filter(objects, function(todo) {
+      return todo && todo.id && todo.id.startsWith('today_');
+    });
+
+    var split = _.partition(todos, function(todo) {
+      return Date.now() - todo.added < 24 * 60 * 60 * 1000;
+    });
+
+    _.each(split[1], function(todo) {
+      localStorage.removeItem(todo.id);
+    });
+
+    return split[0];
   },
 
   emitChange: function() {
@@ -35,7 +46,8 @@ var Store = assign({}, EventEmitter.prototype, {
     localStorage.setItem(id, JSON.stringify({
       id: id,
       text: text,
-      completed: false
+      completed: false,
+      added: Date.now()
     }));
   },
 

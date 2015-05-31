@@ -1,0 +1,35 @@
+{
+  "name": "Today",
+  "version": "0.0.1",
+  "description": "A TODO app with React just for Today",
+  "jest": {
+    "scriptPreprocessor": "preprocessor.js",
+    "collectCoverage": true,
+    "unmockedModulePathPatterns": [
+      "node_modules/react"
+    ]
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "browserify": "^10.2.1",
+    "gulp": "^3.8.11",
+    "gulp-nodemon": "^2.0.3",
+    "gulp-uglify": "^1.2.0",
+    "jest-cli": "^0.4.5",
+    "react-tools": "^0.13.3",
+    "reactify": "^1.1.1",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.2.1"
+  },
+  "dependencies": {
+    "express": "^4.12.4",
+    "debug": "^2.2.0",
+    "flux": "^2.0.3",
+    "jquery": "^2.1.4",
+    "object-assign": "^2.0.0",
+    "react": "^0.13.3",
+    "underscore": "^1.8.3"
+  }
+}
